@@ -1,0 +1,64 @@
+START -> Text 
+	Text -> Head Text | Definition Text | Function Text | Head | Definition | Function
+
+Definition -> IdentifierGroup Variables ";" | IdentifierGroup ";"
+	IdentifierGroup -> StorageAlias IdentifierGroup | Optimization IdentifierGroup | TypeName IdentifierGroup | StorageAlias | Optimization | TypeName
+		StorageAlias -> "typedef" | "extern" | "static" | "auto" | "register"
+		Optimization -> "const" | "volatile"
+		TypeName -> "void" | "char" | "short" | "int" | "long" | "float" | "double" | "signed" | "unsigned" | StructUnionType | EnumType 
+			StructUnionType -> StructUnion ID "{" DefinitionInStruct "}" | StructUnion ID "{" "}" | StructUnion "{" DefinitionInStruct "}" | StructUnion "{" "}" | StructUnion ID
+				StructUnion -> "struct" | "union"
+				DefinitionInStruct -> DefinitionInStruct0 | DefinitionInStruct0 DefinitionInStruct
+					DefinitionInStruct0 -> OptimizationTypeIdentifierGroup Variables ";"
+						OptimizationTypeIdentifierGroup -> Optimization OptimizationTypeIdentifierGroup | TypeName OptimizationTypeIdentifierGroup | Optimization | TypeName
+			EnumType -> "enum" "{" Enums "}" | "enum" ID "{" Enums "}" | "enum" ID
+				Enums -> Enums0 | Enums0 "," Enums
+					Enums0 -> ID | ID "=" ConstFormula
+	Variables -> OneVariable | OneVariable "," Variables 
+		OneVariable -> Declaration | Declaration "=" InitialValue 
+			Declaration -> Pointer SubDeclaration | SubDeclaration 
+				Pointer -> "*" Pointer | "*" Optimizations Pointer | "*" | "*" Optimizations
+					Optimizations -> Optimization "," Optimizations | Optimization
+				SubDeclaration -> ID | SubDeclaration "[" ConstFormula "]" | SubDeclaration "(" FormalParameter ")" | SubDeclaration "(" ")"
+					ConstFormula -> Formula2
+					FormalParameter -> FormalParameter0 "," FormalParameter | FormalParameter0
+						FormalParameter0 -> IdentifierGroup OneVariable | IdentifierGroup
+			InitialValue -> Formula1 | "{" InitialValues "}"
+				InitialValues -> InitialValue | InitialValue "," InitialValues
+
+
+
+
+Function -> IdentifierGroup Declaration Paragraph
+	Paragraph -> "{" Paragraph0 "}" | "{" "}"
+		Paragraph0 -> Definition Paragraph0 | Sentence Paragraph0 | Definition | Sentence
+			Sentence -> Paragraph | FormulaSentence | MarkSentence | IFSentence | JumpSentence | CycleSentence
+				MarkSentence -> ID ":" Sentence | "case" ConstFormula ":" Sentence | "default" ":" Sentence
+				IFSentence -> "if" "(" AllFormula ")" Sentence | "if" "(" AllFormula ")" Sentence "else" Sentence | "switch" "(" AllFormula ")" Sentence
+				CycleSentence -> "while" "(" AllFormula ")" Sentence | "do" Sentence "while" "(" AllFormula ")" ";" | "for" "(" 3Formula ")" Sentence
+					3Formula -> ";" ";" | ";" ";" AllFormula | ";" AllFormula ";" | ";" AllFormula ";" AllFormula | AllFormula ";" ";" | AllFormula ";" ";" AllFormula | AllFormula ";" AllFormula ";" | AllFormula ";" AllFormula ";" AllFormula
+				JumpSentence -> "goto" ID ";" | "continue" ";" | "break" ";" | "return" ";" | "return" AllFormula ";"
+				FormulaSentence -> AllFormula ";"
+					AllFormula -> Formula1 "," AllFormula | Formula1
+					Formula1 -> Formula2 | Formula14 Operator1 Formula1
+					Formula2 -> Formula3 | Formula3 "?" AllFormula ":" Formula2
+					Formula3 -> Formula4 | Formula3 "||" Formula4
+					Formula4 -> Formula5 | Formula4 "&&" Formula5
+					Formula5 -> Formula6 | Formula5 "|" Formula6
+					Formula6 -> Formula7 | Formula6 "^" Formula7
+					Formula7 -> Formula8 | Formula7 "&" Formula8
+					Formula8 -> Formula9 | Formula8 "==" Formula9 | Formula8 "!=" Formula9
+					Formula9 -> Formula10 | Formula9 "<" Formula10 | Formula9 ">" Formula10 | Formula9 "<=" Formula10 | Formula9 ">=" Formula10
+					Formula10 -> Formula11 | Formula10 "<<" Formula11 | Formula10 ">>" Formula11
+					Formula11 -> Formula12 | Formula11 "+" Formula12 | Formula11 "-" Formula12
+					Formula12 -> Formula13 | Formula12 "*" Formula13 | Formula12 "/" Formula13 | Formula12 "%" Formula13
+					Formula13 -> Formula14 | "(" TypeName ")" Formula13
+					Formula14 -> Formula15 | "++" Formula14 | "--" Formula14 | Operator14 Formula13 | "sizeof" "(" Formula14 ")" | "sizeof" "(" TypeName ")"
+					Formula15 -> Formula16 | Formula15 "[" AllFormula "]" | Formula15 "(" AllFormula ")" | Formula15 "(" ")" | Formula15 "." ID | Formula15 "->" ID | Formula15 "++" | Formula15 "--"
+					Formula16 -> ID | Const | ConstString | "(" AllFormula ")"
+						Operator1 -> "=" | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | "&=" | "^=" | "|="
+						Operator14 -> "&" | "*" | "+" | "-" | "~" | "!"
+
+
+
+

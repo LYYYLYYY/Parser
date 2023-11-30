@@ -1,0 +1,152 @@
+this is bad!
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "!"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "&"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "("
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "*"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "+"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "++"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "-"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "--"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "auto"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "break"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "case"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "char"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "const"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "continue"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "default"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "do"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "double"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "else"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "enum"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "extern"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "float"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "for"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "goto"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "if"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "int"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "long"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "register"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "return"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "short"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "signed"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "sizeof"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "static"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "struct"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "switch"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "typedef"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "union"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "unsigned"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "void"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "volatile"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "while"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "{"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "}"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "~"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 Const
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 ConstString
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 ID
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . 
+5 "else"
+
+this is bad!
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "else"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . "else" Sentence 
+5 "while"
+
+IFSentence -> "if" "(" AllFormula ")" Sentence . 
+5 "else"
+

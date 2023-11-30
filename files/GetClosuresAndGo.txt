@@ -1,0 +1,8 @@
+BEGIN
+	Closure:={CLOSURE({[S'→·S，#]})};
+	REPEAT
+		FOR 	Closure中每个项目集I和G‘的每个符号X	DO
+		    IF GO(I，X)非空且不属于Closure，THEN       
+                  把GO(I，X)加入Closure中，同时记录GO(I，X)
+	UNTIL	Closure不再增大
+END

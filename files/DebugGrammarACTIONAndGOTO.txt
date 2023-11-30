@@ -1,0 +1,8 @@
+BEGIN
+	FOR 	GO中每个项目集I和G‘的每个符号X	DO
+		若项目[A→α·aβ, b]属于Ik且GO(Ik, a)＝Ij， a为终结符，则置ACTION[k, a]为“ “sj”
+		若项目[A→α·，a]属于Ik，则置ACTION[k, a]为 “rj”；其中假定A→α为文法G’的第j个产生式。
+		若项目[S‘→S·, #]属于Ik，则置ACTION[k, #]为 “acc”。
+		若GO(Ik，A)＝Ij，则置GOTO[k, A]=j。
+		分析表中凡不能用规则1至4填入信息的空白栏均填上“出错标志”
+END

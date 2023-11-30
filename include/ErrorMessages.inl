@@ -1,0 +1,6 @@
+ERROR_MESSAGE(-1, open file: failed)
+ERROR_MESSAGE(1, lexer: illegal char)
+ERROR_MESSAGE(2, parser: stack not empty)
+ERROR_MESSAGE(3, parser: reduce failed)
+ERROR_MESSAGE(4, parser: GOTO failed)
+ERROR_MESSAGE(5, parser: ACTION failed)

@@ -1,0 +1,186 @@
+START -> Text 
+Text -> Head Text 
+Text -> Definition Text 
+Text -> Function Text 
+Text -> Head 
+Text -> Definition 
+Text -> Function 
+Definition -> IdentifierGroup Variables ";" 
+Definition -> IdentifierGroup ";" 
+IdentifierGroup -> StorageAlias IdentifierGroup 
+IdentifierGroup -> Optimization IdentifierGroup 
+IdentifierGroup -> TypeName IdentifierGroup 
+IdentifierGroup -> StorageAlias 
+IdentifierGroup -> Optimization 
+IdentifierGroup -> TypeName 
+StorageAlias -> "typedef" 
+StorageAlias -> "extern" 
+StorageAlias -> "static" 
+StorageAlias -> "auto" 
+StorageAlias -> "register" 
+Optimization -> "const" 
+Optimization -> "volatile" 
+TypeName -> "void" 
+TypeName -> "char" 
+TypeName -> "short" 
+TypeName -> "int" 
+TypeName -> "long" 
+TypeName -> "float" 
+TypeName -> "double" 
+TypeName -> "signed" 
+TypeName -> "unsigned" 
+TypeName -> StructUnionType 
+TypeName -> EnumType 
+StructUnionType -> StructUnion ID "{" DefinitionInStruct "}" 
+StructUnionType -> StructUnion ID "{" "}" 
+StructUnionType -> StructUnion "{" DefinitionInStruct "}" 
+StructUnionType -> StructUnion "{" "}" 
+StructUnionType -> StructUnion ID 
+StructUnion -> "struct" 
+StructUnion -> "union" 
+DefinitionInStruct -> DefinitionInStruct0 
+DefinitionInStruct -> DefinitionInStruct0 DefinitionInStruct 
+DefinitionInStruct0 -> OptimizationTypeIdentifierGroup Variables ";" 
+OptimizationTypeIdentifierGroup -> Optimization OptimizationTypeIdentifierGroup 
+OptimizationTypeIdentifierGroup -> TypeName OptimizationTypeIdentifierGroup 
+OptimizationTypeIdentifierGroup -> Optimization 
+OptimizationTypeIdentifierGroup -> TypeName 
+EnumType -> "enum" "{" Enums "}" 
+EnumType -> "enum" ID "{" Enums "}" 
+EnumType -> "enum" ID 
+Enums -> Enums0 
+Enums -> Enums0 "," Enums 
+Enums0 -> ID 
+Enums0 -> ID "=" ConstFormula 
+Variables -> OneVariable 
+Variables -> OneVariable "," Variables 
+OneVariable -> Declaration 
+OneVariable -> Declaration "=" InitialValue 
+Declaration -> Pointer SubDeclaration 
+Declaration -> SubDeclaration 
+Pointer -> "*" Pointer 
+Pointer -> "*" Optimizations Pointer 
+Pointer -> "*" 
+Pointer -> "*" Optimizations 
+Optimizations -> Optimization "," Optimizations 
+Optimizations -> Optimization 
+SubDeclaration -> ID 
+SubDeclaration -> SubDeclaration "[" ConstFormula "]" 
+SubDeclaration -> SubDeclaration "(" FormalParameter ")" 
+SubDeclaration -> SubDeclaration "(" ")" 
+ConstFormula -> Formula2 
+FormalParameter -> FormalParameter0 "," FormalParameter 
+FormalParameter -> FormalParameter0 
+FormalParameter0 -> IdentifierGroup OneVariable 
+FormalParameter0 -> IdentifierGroup 
+InitialValue -> Formula1 
+InitialValue -> "{" InitialValues "}" 
+InitialValues -> InitialValue 
+InitialValues -> InitialValue "," InitialValues 
+Function -> IdentifierGroup Declaration Paragraph 
+Paragraph -> "{" Paragraph0 "}" 
+Paragraph -> "{" "}" 
+Paragraph0 -> Definition Paragraph0 
+Paragraph0 -> Sentence Paragraph0 
+Paragraph0 -> Definition 
+Paragraph0 -> Sentence 
+Sentence -> Paragraph 
+Sentence -> FormulaSentence 
+Sentence -> MarkSentence 
+Sentence -> IFSentence 
+Sentence -> JumpSentence 
+Sentence -> CycleSentence 
+MarkSentence -> ID ":" Sentence 
+MarkSentence -> "case" ConstFormula ":" Sentence 
+MarkSentence -> "default" ":" Sentence 
+IFSentence -> "if" "(" AllFormula ")" Sentence 
+IFSentence -> "if" "(" AllFormula ")" Sentence "else" Sentence 
+IFSentence -> "switch" "(" AllFormula ")" Sentence 
+CycleSentence -> "while" "(" AllFormula ")" Sentence 
+CycleSentence -> "do" Sentence "while" "(" AllFormula ")" ";" 
+CycleSentence -> "for" "(" 3Formula ")" Sentence 
+3Formula -> ";" ";" 
+3Formula -> ";" ";" AllFormula 
+3Formula -> ";" AllFormula ";" 
+3Formula -> ";" AllFormula ";" AllFormula 
+3Formula -> AllFormula ";" ";" 
+3Formula -> AllFormula ";" ";" AllFormula 
+3Formula -> AllFormula ";" AllFormula ";" 
+3Formula -> AllFormula ";" AllFormula ";" AllFormula 
+JumpSentence -> "goto" ID ";" 
+JumpSentence -> "continue" ";" 
+JumpSentence -> "break" ";" 
+JumpSentence -> "return" ";" 
+JumpSentence -> "return" AllFormula ";" 
+FormulaSentence -> AllFormula ";" 
+AllFormula -> Formula1 "," AllFormula 
+AllFormula -> Formula1 
+Formula1 -> Formula2 
+Formula1 -> Formula14 Operator1 Formula1 
+Formula2 -> Formula3 
+Formula2 -> Formula3 "?" AllFormula ":" Formula2 
+Formula3 -> Formula4 
+Formula3 -> Formula3 "||" Formula4 
+Formula4 -> Formula5 
+Formula4 -> Formula4 "&&" Formula5 
+Formula5 -> Formula6 
+Formula5 -> Formula5 "|" Formula6 
+Formula6 -> Formula7 
+Formula6 -> Formula6 "^" Formula7 
+Formula7 -> Formula8 
+Formula7 -> Formula7 "&" Formula8 
+Formula8 -> Formula9 
+Formula8 -> Formula8 "==" Formula9 
+Formula8 -> Formula8 "!=" Formula9 
+Formula9 -> Formula10 
+Formula9 -> Formula9 "<" Formula10 
+Formula9 -> Formula9 ">" Formula10 
+Formula9 -> Formula9 "<=" Formula10 
+Formula9 -> Formula9 ">=" Formula10 
+Formula10 -> Formula11 
+Formula10 -> Formula10 "<<" Formula11 
+Formula10 -> Formula10 ">>" Formula11 
+Formula11 -> Formula12 
+Formula11 -> Formula11 "+" Formula12 
+Formula11 -> Formula11 "-" Formula12 
+Formula12 -> Formula13 
+Formula12 -> Formula12 "*" Formula13 
+Formula12 -> Formula12 "/" Formula13 
+Formula12 -> Formula12 "%" Formula13 
+Formula13 -> Formula14 
+Formula13 -> "(" TypeName ")" Formula13 
+Formula14 -> Formula15 
+Formula14 -> "++" Formula14 
+Formula14 -> "--" Formula14 
+Formula14 -> Operator14 Formula13 
+Formula14 -> "sizeof" "(" Formula14 ")" 
+Formula14 -> "sizeof" "(" TypeName ")" 
+Formula15 -> Formula16 
+Formula15 -> Formula15 "[" AllFormula "]" 
+Formula15 -> Formula15 "(" AllFormula ")" 
+Formula15 -> Formula15 "(" ")" 
+Formula15 -> Formula15 "." ID 
+Formula15 -> Formula15 "->" ID 
+Formula15 -> Formula15 "++" 
+Formula15 -> Formula15 "--" 
+Formula16 -> ID 
+Formula16 -> Const 
+Formula16 -> ConstString 
+Formula16 -> "(" AllFormula ")" 
+Operator1 -> "=" 
+Operator1 -> "*=" 
+Operator1 -> "/=" 
+Operator1 -> "%=" 
+Operator1 -> "+=" 
+Operator1 -> "-=" 
+Operator1 -> "<<=" 
+Operator1 -> ">>=" 
+Operator1 -> "&=" 
+Operator1 -> "^=" 
+Operator1 -> "|=" 
+Operator14 -> "&" 
+Operator14 -> "*" 
+Operator14 -> "+" 
+Operator14 -> "-" 
+Operator14 -> "~" 
+Operator14 -> "!" 

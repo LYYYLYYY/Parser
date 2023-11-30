@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Stack and Text Visualization</title>
+    <style>
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /*height: 100vh;*/
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 40px;
+            /* 增加padding以避免内容直接贴边 */
+        }
+
+        .visualization-container {
+            /*display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);*/
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+            /* 确保这里没有设置max-height */
+            /* width: 100%;*/
+            /* 可以设置宽度限制，但保持高度自适应 */
+            margin-top: 30px;
+            margin-bottom: 20px;
+            /* 为容器添加底部边距 */
+        }
+
+        .stacks {
+            display: flex;
+            margin-right: 30px;
+        }
+
+        .stack {
+            display: flex;
+            flex-direction: column-reverse;
+            border: 2px solid #5d93ff;
+            width: 100px;
+            margin: 0 5px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            min-height: 640px;
+            min-width: 150px;
+            /* margin-top: 20px; */
+            /* margin-bottom: 20px; */
+            /*justify-content: flex-end;*/
+        }
+
+        .element {
+            border-bottom: 1px solid #5d93ff;
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            background-color: #e6ebff;
+            transition: transform 0.3s ease;
+        }
+
+        .element:hover {
+            transform: translateY(-2px);
+        }
+
+        .outputs {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .output {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            color: #333;
+            font-size: 16px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 260px;
+            min-height: 25px;
+        }
+
+        .label {
+            flex-shrink: 0;
+            margin-right: 10px;
+            text-align: center;
+            width: 60px;
+            font-weight: bold;
+            color: #5d93ff;
+        }
+
+        .value {
+            flex-grow: 1;
+            text-align: left;
+            border-left: 2px solid #5d93ff;
+            padding-left: 10px;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 15px 30px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 10px;
+            background-color: #5d93ff;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            outline: none;
+            width: 130px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #4a7bfe;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .Auto {
+            margin-right: 8px;
+        }
+
+        .Next {
+            margin-left: 10px;
+        }
+
+        body {
+            animation: gradientBG 15s ease infinite;
+            background-size: 200% 200%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="visualization-container">
+        <div class="stacks">
+            <div id="stack1" class="stack"></div>
+            <div id="stack2" class="stack"></div>
+        </div>
+        <div class="output-container">
+            <div id="token" class="output"><span class="label">Token</span><span id="token_value"
+                    class="value">&nbsp;</span>
+            </div>
+            <div id="action" class="output"><span class="label">Action</span><span id="action_value"
+                    class="value">&nbsp;
+                </span></div>
+            <button class="Auto" onclick="startVisualization()">Auto</button>
+            <button class="Next" onclick="performNextAction()">Next</button>
+        </div>
+    </div>
+
+    <script>
+        let actions = [];
+
+        function updateStacks(action) {
+            let stack1 = document.getElementById('stack1');
+            let stack2 = document.getElementById('stack2');
+
+            if (action.Stack.action === 'push') {
+                let element1 = action.Stack.element[0]; // 从元组中提取第一个元素
+                let element2 = action.Stack.element[1]; // 从元组中提取第二个元素
+
+                let newElement1 = document.createElement('div');
+                newElement1.className = 'element';
+                newElement1.innerText = element1; // 使用第一个元素更新第一个栈
+                stack1.appendChild(newElement1);
+
+                let newElement2 = document.createElement('div');
+                newElement2.className = 'element';
+                newElement2.innerText = element2; // 使用第二个元素更新第二个栈
+                stack2.appendChild(newElement2);
+            } else if (action.Stack.action === 'pop') {
+                stack1.removeChild(stack1.lastChild);
+                stack2.removeChild(stack2.lastChild);
+            }
+        }
+
+
+        function updateOutputs(action) {
+            document.getElementById('token_value').innerText = `${action.Token}`;
+            document.getElementById('action_value').innerText = `${action.Action}`;
+        }
+
+        let index = 0;
+
+        function performNextAction() {
+            if (index < actions.length) {
+                let action = actions[index++];
+                updateStacks(action);
+                updateOutputs(action);
+            }
+        }
+
+        function startVisualization() {
+            function nextAction() {
+                if (index < actions.length) {
+                    let action = actions[index++];
+                    updateStacks(action);
+                    updateOutputs(action);
+                    setTimeout(nextAction, 100); // 0.1秒的间隔
+                }
+            }
+            nextAction();
+        }
+
+    </script>
+</body>
+
+</html>
